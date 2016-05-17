@@ -1,0 +1,154 @@
+@font-face {
+font-family: avenir;
+	src: url("avenir-font/Avenir-Medium.ttf");
+	 font-weight: 300;
+}
+@font-face {
+font-family: avenir;
+	src: url("avenir-font/Avenir-Heavy.ttf");
+	 font-weight: 500;
+}
+@font-face {
+font-family: avenir;
+	src: url("avenir-font/Avenir-Black.ttf");
+	 font-weight: 800;
+}
+@font-face {
+font-family: avenir;
+	src: url("avenir-font/Avenir-Light.ttf");
+	 font-weight: 100;
+}
+
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: avenir;
+	margin: 32px;
+	font-weight: 300;
+}
+
+header {
+	height: 100px;
+}
+
+.logo {
+	float: left;
+}
+
+h1 {
+	font-size: 16pt;
+	color: #B3B3B3;
+	width: 200px;
+	float: left;
+	font-weight: 300;
+}
+
+h2 {
+	color: #7BCAE9;
+	font-weight: 500;
+	font-size: 19pt;
+}
+
+a {
+	float: right;
+	color: #3E454D;
+	margin: 0.67em 0 0 0;
+	text-decoration: none;
+}
+
+.lijst {
+	width: 100%;
+	border: 1px solid #F5F7FF;
+	text-align: center;
+	font-weight: 300;
+	color: #808080;
+	border-collapse: collapse;
+}
+
+th {
+	font-weight: 100;
+}
+
+
+
+.header-row {
+	font-weight: 100;
+	color: #3E454D;
+	padding: 5px 0;
+	height: 70px;
+	font-size: 12pt;
+}
+
+.gewicht-icon {
+	margin: 15px 5px 0 0;
+	float: left;
+}
+
+tr {
+	height: 120px;
+	padding: 0;
+}
+
+.patient:hover {
+	background: rgb(226,242,250);
+	cursor: pointer;
+}
+
+td.column-naam {
+	font-size: 14pt;
+}
+
+td.column-gewicht {
+	font-size: 19pt;
+}
+
+td.column-gem-hartritme {
+	font-size: 19pt;
+}
+
+.patient-icon {
+	width: 60px;
+	height: 60px;
+	border: 2px solid #3E454D;
+	opacity: 0.22;
+	border-radius: 100px;
+	margin: auto;
+}
+
+mark {
+	margin-left: 5px;
+	background: rgba(0,0,0,0);
+	color: #808080;
+	font-size: 11pt;
+}
+
+.week-icon {
+	width: 32px; 
+	height: 32px;
+}
+
+.gewicht-titel {
+	float: left;
+}
+
+@media screen and (max-width: 1100px) {
+   
+	.column-weekoverzicht {
+		display: none;
+	}
+	
+	.column-hartritme {
+		width: 100px;
+	}
+	
+}
+
+@media screen and (max-width: 800px) {
+
+	
+	.column-hartritme {
+			display: none;
+	}
+	
+}

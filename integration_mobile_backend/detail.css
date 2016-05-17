@@ -1,0 +1,274 @@
+@font-face {
+font-family: avenir;
+	src: url("avenir-font/Avenir-Medium.ttf");
+	 font-weight: 300;
+}
+@font-face {
+font-family: avenir;
+	src: url("avenir-font/Avenir-Heavy.ttf");
+	 font-weight: 500;
+}
+@font-face {
+font-family: avenir;
+	src: url("avenir-font/Avenir-Black.ttf");
+	 font-weight: 800;
+}
+@font-face {
+font-family: avenir;
+	src: url("avenir-font/Avenir-Light.ttf");
+	 font-weight: 100;
+}
+
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: avenir;
+	font-weight: 300;
+}
+
+aside {
+	width: 290px;
+	height: 100%;
+	float: left;
+	border-right: 2px solid #E4E4E4;
+	position: fixed;
+}
+
+.logo {
+	float: left;
+	margin: 20px 10px 0 20px;
+}
+
+.mioso {
+	float: left;
+	width: 100px;
+	margin: 40px 0;
+	color: #B3B3B3;
+	font-weight: 300;
+	font-size: 16pt;
+}
+
+.back-button {
+	text-decoration: none;
+	float: left;
+	width: 100%;
+	margin: 20PX 0;
+	padding-left: 30PX;
+	text-transform: uppercase;
+	color: #B3B3B3;
+}
+
+.lijst-titel {
+	color: #7BCAE9;
+	font-weight: 500;
+	font-size: 19pt;
+	margin: 20px 0 0 20px;
+}
+
+.patienten-list {
+	list-style: none;
+}
+
+.patient-icon {
+	border-radius: 100px;
+	width: 50px;
+	height: 50px;
+	margin: 5px 20px 0 0;
+	float: left;
+}
+
+.list-item-link {
+	text-decoration: none;
+	color: #808080;
+}
+
+.list-item-naam {
+	float: left;
+	width: 150px;
+	margin: 20px 0 25px 0;
+}
+
+.main-content {
+	width: calc(100% - 290px);
+	float: left;
+	height: 100%;
+	margin-left: 290px;
+}
+
+.wrapper {
+	width: 93%;
+	margin: 40px auto 0 auto;
+}
+
+section.kalender {
+	height: 400px;
+	width: 68%;
+}
+
+section.persoon-info {
+	height: 300px;
+	width: 30%;
+	float: right;
+	margin: 100px 0 0 0; 
+}
+
+section.chart {
+	margin-top: 30px;
+	height: 210px;
+	width: 100%;
+}
+
+.card {
+	float: left;
+	border: 1px solid #F5F7FF;
+	border-radius: 10px;
+}
+
+/**********************************************************/
+/**********************************************************/
+/********KALENDER******************************************/
+/**********************************************************/
+
+.kalender-header {
+	margin: 0 auto 0 auto;
+	width: 400px;
+	height: 70px;
+}
+
+.icon {
+	float: left;	
+}
+
+.kalender-month {
+	width: calc(100% - 140px);
+	float: left;
+	text-align: center;
+	font-size: 14pt;
+	color: #3E454D;
+	font-weight: 300;
+	padding-top: 10px;
+}
+
+table.kalender {
+	margin: 0 auto;
+	width: 94%;
+	height: 320px;
+	border-collapse: collapse;
+}
+
+th {
+	width: calc(94%/7);
+	color: #B3B3B3;
+	font-size: 8pt;
+	text-align: left;
+	font-weight: 300;
+	border-bottom: 2px solid #7BCAE9;
+	height: 20px;
+}
+
+td {
+	width: calc(94%/7);
+	vertical-align: top;
+	color: #B3B3B3;
+	font-weight: 300;
+	font-size: 12pt;
+	padding-top: 5px;
+}
+	
+
+/**********************************************************/
+/**********************************************************/
+/********PERSOON-INFO**************************************/
+/**********************************************************/
+
+.icon-wrapper {
+	width: 110px;
+	margin: auto;
+}
+
+.persoon-icon {
+	position: relative;
+	margin: -55px 0;
+}
+
+.persoon-naam {
+	text-align: center;
+	margin: 100px 0 10px 0;
+	color: #3E454D;
+	font-size: 14pt;
+	font-weight: 300;
+}
+
+.boven {
+	float: left;
+	margin: auto;
+	width: 100%;
+}
+
+mark {
+	margin-left: 5px;
+	background: rgba(0,0,0,0);
+	color: #808080;
+	font-size: 16pt;
+}
+
+.info {
+	color: #808080;
+	font-size: 36pt;
+	margin: 0 0 15px 0;
+}
+
+.persoon-kg {
+	text-align: center;
+	width: 50%;
+	float: left;
+}
+
+.persoon-leeftijd {
+	text-align: center;
+	width: 50%;
+	float: left;
+}
+
+.persoon-bmi {
+	float: left;
+	text-align: center;
+	width: 100%;
+}
+
+@media screen and (max-width: 1100px) {
+	
+   	section.kalender {
+		width: 100%;
+	}
+
+	section.persoon-info {
+		float: left;
+		width: 100%;
+		margin-top: 20px;
+		height: 210px;
+	}
+	
+	.persoon-naam {
+		margin-top: 20px;
+	}
+
+	section.chart {
+
+	}
+	
+}
+
+@media screen and (max-width: 900px) {
+	
+	aside {
+		display: none;
+	}
+	
+	section.main-content {
+		margin: 0;
+		width: 100%;
+	}
+	
+}

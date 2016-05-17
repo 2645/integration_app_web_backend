@@ -39,14 +39,8 @@ include_once 'Validation/ImageHandler.php';
  *     echo $returnvalue["error"];
  * }
  */
-  $returnvalue = API::getPatienten(26);
- if (strcmp($returnvalue["error"], "") === 0) {
-     foreach ($returnvalue["values"] as $patient) {
-         echo $patient->getVoornaam() . " " . $patient->getNaam() . " : " . $patient->getLeeftijd() . " jaar oud- " . $patient->getLengte() . " cm<br>";
-     }
- }else{
-     echo $returnvalue["error"];
- }
+
+
 /*
  *  -- GET HARTSLAG TEST --
  * $returnvalue = API::getHartslag("test");
@@ -79,15 +73,14 @@ include_once 'Validation/ImageHandler.php';
  *     echo $patient->getVoornaam() . " " . $patient->getNaam() . " : " . $patient->getLeeftijd() . " jaar oud- " . $patient->getLengte() . " cm<br>";
  * }else{
  *     echo $returnvalue["error"];
-}
-*/
+  }
+ */
 
 /*
  * -- REGISTER VERZORGING TEST --
  * $returnvalue = API::registerVerzorging(2, "test");
  * echo $returnvalue["error"];
  */
-
 
 class API {
 
@@ -124,40 +117,41 @@ class API {
             );
         }
     }
-     
-    public static function addPatient($id, $naam, $voornaam, $leeftijd, $lengte, $adres, $foto){
+
+    public static function addPatient($id, $naam, $voornaam, $leeftijd, $lengte, $adres, $foto) {
         $foto = ImageHandler::uploadImage($foto, $id);
         $patient = new Patient($id, $naam, $voornaam, $leeftijd, $lengte, $adres, $foto);
         PatientDAO::insert($patient);
     }
-    
-    public static function registerVerzorging($id_mantelzorger, $id_patient){
+
+    public static function registerVerzorging($id_mantelzorger, $id_patient) {
         $beheerder = self::getBeheerderById($id_mantelzorger);
         $patient = self::getPatientById($id_patient);
-        
-        if(strcmp($beheerder["error"],"") === 0 && strcmp($patient["error"], "") === 0){
-            VerzorgingDAO::insert(new Verzorging($id_mantelzorger,$id_patient));
+
+        if (strcmp($beheerder["error"], "") === 0 && strcmp($patient["error"], "") === 0) {
+            VerzorgingDAO::insert(new Verzorging($id_mantelzorger, $id_patient));
             return array(
-                "error"=>""                
+                "error" => ""
             );
-        }else{
-            if(strcmp($beheerder["error"],"") === 0 ){
+        } else {
+            if (strcmp($beheerder["error"], "") === 0) {
                 return array(
-                    "error"=>"no patient with given ID"
+                    "error" => "no patient with given ID"
                 );
-            }else if(strcmp($patient["error"], "") === 0){
+            } else if (strcmp($patient["error"], "") === 0) {
                 return array(
-                    "error"=>"no caretaker with given ID"
-                );                
-            }else{
+                    "error" => "no caretaker with given ID"
+                );
+            } else {
                 return array(
-                    "error"=>"no caretaker and patient with given ID's"
+                    "error" => "no caretaker and patient with given ID's"
                 );
             }
         }
     }
-    
+
     public static function getPatienten($id_mantelzorger) {
+
         if (is_numeric($id_mantelzorger)) {
             return array(
                 "error" => "",
@@ -185,8 +179,8 @@ class API {
             );
         }
     }
-    
-    public static function getBeheerderById($id_mantelzorger){
+
+    public static function getBeheerderById($id_mantelzorger) {
         $beheerder = BeheerderDAO::getById($id_mantelzorger);
         if ($beheerder == false) {
             return array(
@@ -204,8 +198,8 @@ class API {
     public static function getHartslag($id_patient) {
         return HartslagDAO::getById($id_patient);
     }
-    
-    public static function addHartslag($id, $tijd, $waarde){
+
+    public static function addHartslag($id, $tijd, $waarde) {
         $hartslag = new Hartslag($id, $tijd, $waarde);
         HartslagDAO::insert($hartslag);
     }
@@ -214,17 +208,61 @@ class API {
         return GewichtDAO::getById($id_patient);
     }
 
-    public static function addGewicht($id, $tijd, $waarde){
+    public static function getLaatsteGewicht($id_patient) {
+        $gewichten = GewichtDAO::getById($id_patient);
+        if (count($gewichten) <= 0) {
+            return new Gewicht($id_patient, time(), 0);
+        }
+        return $gewichten[count($gewichten) - 1];
+    }
+
+    public static function getGewogenDagenPerWeek($id_patient) {
+        $gewichten = GewichtDAO::getById($id_patient);
+        $gewichtGemeten = array(false, false, false, false, false, false, false);
+        $ts = strtotime('Monday this week');
+        foreach ($gewichten as $gewicht) {
+            if (strtotime($gewicht->getTijd()) >= $ts) {
+                $gewichtGemeten[date("N", strtotime($gewicht->getTijd())) - 1] = true;
+            }
+        }
+       
+        return $gewichtGemeten;
+    }
+
+    public static function getLaatsteHartslag($id_patient) {
+        $hartslagen = HartslagDAO::getById($id_patient);
+        if (count($hartslagen) <= 0) {
+            return new Hartslag($id_patient, time(), -1);
+        } else {
+            return $hartslagen[count($hartslagen) - 1];
+        }
+    }
+
+    public static function getGemiddeldeHartslag($id_patient) {
+        $hartslagen = HartslagDAO::getById($id_patient);
+        $gemiddelde = 0;
+        if (count($hartslagen) <= 0) {
+            return -1;
+        } else {
+            foreach ($hartslagen as $hartslag) {
+                $gemiddelde += $hartslag->getWaarde();
+            }
+            return $gemiddelde / count($hartslagen);
+        }
+    }
+
+    public static function addGewicht($id, $tijd, $waarde) {
         $gewicht = new Gewicht($id, $tijd, $waarde);
         GewichtDAO::insert($gewicht);
     }
-    
+
     public static function getVal($id_patient) {
         return ValDAO::getById($id_patient);
     }
-    
-    public static function addVal($id, $tijd){
+
+    public static function addVal($id, $tijd) {
         $val = new Val($id, $tijd);
         ValDAO::insert($val);
     }
+
 }

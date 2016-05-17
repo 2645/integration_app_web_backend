@@ -1,0 +1,94 @@
+@font-face {
+font-family: avenir;
+	src: url("avenir-font/Avenir-Medium.ttf");
+	 font-weight: 300;
+}
+@font-face {
+font-family: avenir;
+	src: url("avenir-font/Avenir-Heavy.ttf");
+	 font-weight: 500;
+}
+@font-face {
+font-family: avenir;
+	src: url("avenir-font/Avenir-Black.ttf");
+	 font-weight: 800;
+}
+@font-face {
+font-family: avenir;
+	src: url("avenir-font/Avenir-Light.ttf");
+	 font-weight: 100;
+}
+
+
+body {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-family: avenir;
+}
+
+header {
+	margin-top: 100px;
+}
+
+h1 {
+	font-weight: 300;
+	font-size: 24pt;
+	color: #B3B3B3;
+	margin: 10px 0 0 0;
+}
+
+h2.form-titel {
+	color: rgb(146,207,236);;
+	font-weight: 500;
+	text-align: left;
+}
+
+form.logInForm {
+	width: 430px;
+	margin: auto;
+	margin-top: 80px;
+	margin-bottom: 50px;
+}
+
+input {
+	border: none;
+	border-bottom: 2px solid #E4E4E4;
+	width: 100%;
+	height: 50px;
+	font-size: 12pt;
+	font-weight: 100;
+	color: #9D9D9D;
+}
+
+button {
+	color : #FFFFFF;
+	width: 170px;
+	height: 30px;
+	background: none;
+	background-color: rgb(146,207,236);
+	margin: 50px 0 0 0;
+	border: none;
+	border-radius: 100px;
+	font-size: 9pt;
+}
+
+#button-account-maken{
+	float: left;
+	margin-left: 15px;
+}
+
+#button-continue{
+	float: right;
+	margin-right: 15px;
+}
+
+.paswoord-link{
+	text-decoration: none;
+	color: #B3B3B3;
+	font-weight: 100;
+	font-size: 9pt;
+	width: 100%;
+	margin-top: 45px;
+	float: left;
+}
