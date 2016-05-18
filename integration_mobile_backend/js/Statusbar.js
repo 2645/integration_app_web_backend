@@ -30,12 +30,12 @@ var Statusbar = (function() {
 	function cropImage(context, width, height) {
 		context.save();
 		context.beginPath();
-		context.arc(width/2, height/2, 2 * 20, 0, Math.PI*2, true);   
+		context.arc(width/2, height/2, 2 * width/6, 0, Math.PI*2, true);   
 		context.closePath();
 		context.clip();
-		context.drawImage(this.foto,-5,15,120,80);
+		context.drawImage(this.foto,0,(height/6),width,1.3 * height/2);
 		context.beginPath();
-		context.arc(width/2, height/2, 2 * 24, 0, Math.PI*2, true);
+		context.arc(width/2, height/2, 2 * width/6 + 10, 0, Math.PI*2, true);
 		context.clip();
 		context.closePath();
 		context.restore();
@@ -43,7 +43,7 @@ var Statusbar = (function() {
 			
 	function drawCircle(context) {
 		
-		context.strokeStyle= "#D2D2D2";
+		context.strokeStyle = "#D2D2D2";
 		context.lineWidth=4;
 		context.stroke();
 
@@ -55,7 +55,7 @@ var Statusbar = (function() {
 		context.strokeStyle= "#6EBFE5";
 		context.lineWidth = 6;
 		context.lineCap="round";
-		context.ellipse(width/2, height/2, 48, 48, 3 * (Math.PI / 2), 0, value * Math.PI);
+		context.ellipse(width/2, height/2,  2 * width/6 + 10,  2 * width/6 + 10, 3 * (Math.PI / 2), 0, value * Math.PI);
 		context.stroke();
 	
 	}

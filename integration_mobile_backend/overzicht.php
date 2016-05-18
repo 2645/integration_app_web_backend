@@ -21,14 +21,9 @@ if (!isset($_SESSION["userid"])) {
             <script type="text/javascript" src="js/debugger.js"></script>
             <script type="text/javascript" src="js/canvas_helper.js"></script>
             <script type="text/javascript" src="js/fps.js"></script>
-            <script type="text/javascript" src="js/Statusbar.js"></script>
-            <script type="text/javascript" src="js/Hartmeter.js"></script>
-            <script type="text/javascript" src="js/informatieManager.js"></script>
-
             <script>
                 $(document).ready(function () {
                     $(".patient").click(function () {
-
                         var url = 'detail.php';
                         var form = $('<form action="' + url + '" method="post">' +
                                 '<input type="text" name="patientid" value="' + $(this).attr('id') + '" />' +
@@ -68,32 +63,43 @@ if (!isset($_SESSION["userid"])) {
                     foreach ($patienten['values'] as $patient) {
                         ?>
                         <tr id="<?php echo $patient->getId() ?>" class="patient animated fadeInUp2">
-                            <td class="column-foto"><canvas class="statusbar" id="canvas<?php echo $patient->getId() ?>" width="110" height="110"</canvas></td>
+                            <td class="column-foto">
+                                <svg width="110" height="110">
+                                    <defs>
+                                        <clipPath id="circleView">
+                                            <circle cx="55" cy="55" r="45" fill="#FFFFFF" />            
+                                        </clipPath>
+                                    </defs>                                    
+                                    <image  height="110" width="110" xlink:href="<?php echo $patient->getFoto() ?>" clip-path="url(#circleView)" preserveAspectRatio="xMidYMid slice"/>
+                                    <circle cx="55" cy="55" r="48" stroke="#C7DFF2" stroke-width="5" stroke-linejoin="round" fill="none" />  
+                                    <circle cx="55" cy="55" r="48" stroke="#7BCAE9" stroke-width="5" stroke-linejoin="round" fill="none" stroke-dasharray="<?php echo rand(0,301)?>,360"/>
+                                </svg>
+                            </td>
                             <td class="column-naam"><?php echo $patient->getVoornaam() . " " . $patient->getNaam() ?></td>
                             <td class="week-overzicht">
+                            <?php
+                            foreach (API::getGewogenDagenPerWeek($patient->getId()) as $key => $item) {
+                                ?>
+                                <img class="week-icon" src="
                                 <?php
-                                foreach (API::getGewogenDagenPerWeek($patient->getId()) as $key => $item) {
-                                    ?>
-                                    <img class="week-icon" src="
-                                    <?php
-                                    if ($item) {
-                                        if ($key < 5) {
-                                            echo "img/checked.svg";
-                                        } else {
-                                            echo "img/checkedWeekend.svg";
-                                        }
+                                if ($item) {
+                                    if ($key < 5) {
+                                        echo "img/checked.svg";
                                     } else {
-                                        if ($key < 5) {
-                                            echo "img/unchecked.svg";
-                                        } else {
-                                            echo "img/uncheckedWeekend.svg";
-                                        }
+                                        echo "img/checkedWeekend.svg";
                                     }
-                                    ?>
-                                         ">
-                                         <?php
-                                     }
-                                     ?>
+                                } else {
+                                    if ($key < 5) {
+                                        echo "img/unchecked.svg";
+                                    } else {
+                                        echo "img/uncheckedWeekend.svg";
+                                    }
+                                }
+                                ?>
+                                     ">
+                                     <?php
+                                 }
+                                 ?>
                             </td>
                             <td class="column-gewicht"><?php echo API::getLaatsteGewicht($patient->getId())->getWaarde() ?><mark>Kg</mark></td>
                             <td class="column-gem-hartritme"><?php echo API::getGemiddeldeHartslag($patient->getId()) ?><mark>Bpm</mark></td>

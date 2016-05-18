@@ -27,7 +27,7 @@ var Hartmeter = (function() {
 		}
 		
 		if(this.valueMax <= 260){
-			drawStop(this.context,this.valueMax);
+			drawStop(this.context,this.valueMax,this.valueMin);
 		}
 			
 	};
@@ -69,7 +69,6 @@ var Hartmeter = (function() {
 		}
 		context.fill();
 		context.font = '100 18px avenir';
-		context.fillStyle = '#7BCAE9';
 		context.textBaseline = 'top';
 		context.fillText  (valueMin, valueMin - 10, 20);
 		
@@ -85,7 +84,6 @@ var Hartmeter = (function() {
 		}
 		context.fill();
 		context.font = '100 18px avenir';
-		context.fillStyle = '#7BCAE9';
 		context.textBaseline = 'top';
 		context.fillText  (valueMax, valueMax - 14, 20);
 		

@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="htdocs">
-            <file>file:/C:/xampp/htdocs/integration_mobile_backend/gewicht.php</file>
-            <file>file:/C:/xampp/htdocs/integration_mobile_backend/hartslag.php</file>
-            <file>file:/C:/xampp/htdocs/integration_mobile_backend/API.php</file>
-            <file>file:/C:/xampp/htdocs/integration_mobile_backend/login.php</file>
-            <file>file:/C:/xampp/htdocs/integration_mobile_backend/index.php</file>
-            <file>file:/C:/xampp/htdocs/integration_mobile_backend/register.php</file>
-            <file>file:/C:/xampp/htdocs/integration_mobile_backend/nieuwePatient.php</file>
+            <file>file:/C:/xampp/htdocs/integration_app_web_backend/integration_mobile_backend/detail.php</file>
+            <file>file:/C:/xampp/htdocs/integration_app_web_backend/integration_mobile_backend/overzicht.php</file>
         </group>
     </open-files>
 </project-private>

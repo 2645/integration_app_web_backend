@@ -183,18 +183,19 @@ td {
 /**********************************************************/
 
 .icon-wrapper {
-	width: 110px;
+	width: 200px;
 	margin: auto;
 }
 
 .persoon-icon {
 	position: relative;
-	margin: -55px 0;
+	margin: -100px 0 0 0;
+	
 }
 
 .persoon-naam {
 	text-align: center;
-	margin: 100px 0 10px 0;
+	margin: 10px 0 10px 0;
 	color: #3E454D;
 	font-size: 14pt;
 	font-weight: 300;
@@ -246,8 +247,8 @@ mark {
 	section.persoon-info {
 		float: left;
 		width: 100%;
-		margin-top: 20px;
-		height: 210px;
+		margin-top: 100px;
+		height: 320px;
 	}
 	
 	.persoon-naam {

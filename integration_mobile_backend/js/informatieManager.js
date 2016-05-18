@@ -1,5 +1,5 @@
 /* jshint browser: true */
-/* global Debugger, CanvasHelper, Statusbar, FPS, Hartmeter, Grafiek */
+/* global Debugger, CanvasHelper, Statusbar, FPS, Hartmeter, Grafiek*/
 
 window.addEventListener("load", init);
 
@@ -9,25 +9,22 @@ var j = 0;
 
 var statusbars = [];
 var hartmeters = [];
-var chart;
+
 
 var foto = new Image();
 
-var start2= false;
-var start3= false;
-
 var fps = new FPS(60);
 	
-var temp1 = 0.0;
-var temp2 = 0.0;
-var temp3 = 0.0;
 
 var chartCanvas;
-			
-var chartContext;
 
 
-foto.src = '/img/Walter-White.jpg';
+var chart;
+
+var myElem;
+
+
+foto.src = 'uploads/bigmike';
 
 
 function init() {
@@ -37,20 +34,6 @@ function init() {
         return false;
 		
     }
-	
-	
-	chartCanvas = document.getElementById('myChart');
-	
-	if (chartCanvas === null){
-	
-	} else {
-	chartContext = chartCanvas.getContext('2d');	
-	
-	window.addEventListener('resize', resizeCanvas, false);
-	
-	resizeCanvas();
-		
-	}
 	
 	
 	$(document).ready(function(){
@@ -68,22 +51,50 @@ function init() {
 			hartmeters[j] = hartmeter;
 			j++;
 		});
-	});
+	}); 
 
+	myElem = document.getElementById('canvasPersoon');
+	if (myElem === null) {}
+	else {
+		myElem = new CanvasHelper('canvasPersoon');
+		myElem.scaleOnHiDPI();
+		drawStatusBar(1.3, myElem, 200, 200);
+	}
 	
 	window.requestAnimFrame(render);
+	chartCanvas = new CanvasHelper('myChart');
+	chartCanvas.scaleOnHiDPI();
+
 	
 	
-	setTimeout( start2ndBar, 400 );
-	setTimeout( start3rdBar, 800 );
+	window.addEventListener('resize', resizeCanvas, false);
 	
+	resizeCanvas();
 }
 
-function drawStatusBar(value, canvas){
+function redraw() {
+				drawChart();
+			}
+
+function resizeCanvas() {
+				var scaler = document.getElementById('scaler');
+				chartCanvas.width = scaler.clientWidth - 50;
+				redraw();
+			}
+
+function drawStatusBar(value, canvas, width, heigth){
 				
 	var statusbar = new Statusbar();
-	statusbar.update(canvas,110,110,value,foto,1);
+	statusbar.update(canvas,width,heigth,value,foto,1);
 	statusbar.draw();	
+}
+
+function drawChart() {
+	
+	chart = new Grafiek();
+	chart.update(chartCanvas, "gewicht", "maandag", 70, "dinsdag", 65, "woensdag", 72, "donderdag", 64, "vrijdag", 68, "zaterdag", 65, "zondag", 70);
+	chart.draw();
+	
 }
 
 function drawHartmeter(canvas,valueMin,valueMax){
@@ -95,18 +106,19 @@ function drawHartmeter(canvas,valueMin,valueMax){
 
 function render() {
 	if (fps.update()) {	
-		animateBars(1.6, 1, 1.2);
-    }
+
+	}
 	 window.requestAnimFrame(render);
 	
 	for (var k = 0; k < hartmeters.length; k++) {
 			
-		drawStatusBar(temp1,statusbars[k]);
-		drawHartmeter(hartmeters[k],90,230);
+		drawStatusBar(90,statusbars[k],110,110);
+		drawHartmeter(hartmeters[k],90,220);
 	}
+	
 }
 
-function animateBars(value1, value2, value3){
+/*function animateBars(value1, value2, value3){
 	
 	if(temp1 <= value1) {
 
@@ -123,25 +135,4 @@ function animateBars(value1, value2, value3){
 		temp3+=0.025;
 	}
 }
-
-function start2ndBar() {
-	start2 = true;
-}
-
-function start3rdBar() {
-	start3 = true;
-}
-	
-
-function resizeCanvas() {
-	chartCanvas.width = window.innerWidth - 370;
-	chartCanvas.height = 210;
-	redraw();
-}
-
-function redraw() {
-	console.log(chartCanvas);
-	chart = new Grafiek();
-	chart.update(chartCanvas,"",79,50,87,87,87,98,98);
-	chart.draw();
-}
+*/

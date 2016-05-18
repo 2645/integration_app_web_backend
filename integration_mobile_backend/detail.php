@@ -25,7 +25,19 @@ $patient = API::getPatientById($_POST["patientid"])['value'];
             <script type="text/javascript" src="js/Statusbar.js"></script>
             <script type="text/javascript" src="js/informatieManager.js"></script>
             <script type="text/javascript" src="js/Grafiek.js"></script>
+            <script>
+                $(document).ready(function () {
+                    $(".patienten-list li").click(function () {
 
+                        var url = 'detail.php';
+                        var form = $('<form action="' + url + '" method="post">' +
+                                '<input type="text" name="patientid" value="' + $(this).attr('id') + '" />' +
+                                '</form>');
+                        $('body').append(form);
+                        form.submit();
+                    });
+                });
+            </script>
             <title>Mioso - detail
             </title>
         </head>
@@ -43,8 +55,8 @@ $patient = API::getPatientById($_POST["patientid"])['value'];
                     <?php
                     foreach (API::getPatienten($_SESSION["userid"])['values'] as $current) {
                         ?>
-                        <li class="list-item"><a class="list-item-link" href="">
-                                <img class="patient-icon" src="<?php echo $current->getFoto() ?>"><p class="list-item-naam"><?php echo $current->getVoornaam()." ".$current->getNaam()?></p></a></li>
+                        <li class="list-item" id="<?php echo $current->getId() ?>">
+                                <img class="patient-icon" src="<?php echo $current->getFoto() ?>"><p class="list-item-naam"><?php echo $current->getVoornaam()." ".$current->getNaam()?></p></li>
                         <?php
                     }
                     ?>                
@@ -55,7 +67,7 @@ $patient = API::getPatientById($_POST["patientid"])['value'];
                 <div class="wrapper">
                     <section class="kalender card animated fadeInUp2">
                         <header class="kalender-header">
-                            <img class="icon" id="kalendericon-left" src="/img/left-arrow.svg" width="70px" height="70px">
+                            <img class="icon" id="kalendericon-left" src="img/left-arrow.svg" width="70px" height="70px">
                             <h2 class="kalender-month">January 2016</h2>
                             <img class="icon" id="kalendericon-right" src="img/right-arrow.svg" width="70px" height="70px">
                         </header>
@@ -121,7 +133,16 @@ $patient = API::getPatientById($_POST["patientid"])['value'];
 
                         <div class="icon-container">
                             <div class="icon-wrapper">
-                                <canvas class="persoon-icon" id="canvas1" width="110" height="110"></canvas>
+                                <svg width="200" height="200">
+                                    <defs>
+                                        <clipPath id="circleView">
+                                            <circle cx="100" cy="100" r="90" fill="#FFFFFF" />            
+                                        </clipPath>
+                                    </defs>                                    
+                                    <image  height="200" width="200" xlink:href="<?php echo $patient->getFoto() ?>" clip-path="url(#circleView)" preserveAspectRatio="xMidYMid slice"/>
+                                    <circle cx="100" cy="100" r="90" stroke="#C7DFF2" stroke-width="5" stroke-linejoin="round" fill="none" />  
+                                    <circle cx="100" cy="100" r="90" stroke="#7BCAE9" stroke-width="5" stroke-linejoin="round" fill="none" stroke-dasharray="<?php echo rand(0,720)?>,720"/>
+                                </svg>
                             </div>
                             <h3 class="persoon-naam"><?php echo $patient->getVoornaam(). " " . $patient->getNaam() ?></h3>
                             <div class="persoon-info">
@@ -138,7 +159,7 @@ $patient = API::getPatientById($_POST["patientid"])['value'];
 
                     </section>
 
-                    <section class="chart card animated fadeInUp4">
+                    <section id="scaler" class="chart card animated fadeInUp4">
                         <canvas id="myChart" width="1050" height="200"></canvas>
                     </section>
 
