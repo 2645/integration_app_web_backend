@@ -71,8 +71,8 @@ if (!isset($_SESSION["userid"])) {
                                         </clipPath>
                                     </defs>                                    
                                     <image  height="110" width="110" xlink:href="<?php echo $patient->getFoto() ?>" clip-path="url(#circleView)" preserveAspectRatio="xMidYMid slice"/>
-                                    <circle cx="55" cy="55" r="48" stroke="#C7DFF2" stroke-width="5" stroke-linejoin="round" fill="none" />  
-                                    <circle cx="55" cy="55" r="48" stroke="#7BCAE9" stroke-width="5" stroke-linejoin="round" fill="none" stroke-dasharray="<?php echo rand(0,301)?>,360"/>
+                                    <circle cx="55" cy="55" r="50" stroke="#C7DFF2" stroke-width="5" stroke-linejoin="round" fill="none" />  
+                                    <circle cx="55" cy="55" r="50" stroke="#7BCAE9" stroke-width="5" stroke-linejoin="round" fill="none" stroke-dasharray="<?php echo rand(0,301)?>,360"/>
                                 </svg>
                             </td>
                             <td class="column-naam"><?php echo $patient->getVoornaam() . " " . $patient->getNaam() ?></td>
