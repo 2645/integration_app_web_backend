@@ -119,8 +119,17 @@ class API {
     }
 
     public static function addPatient($id, $naam, $voornaam, $leeftijd, $lengte, $adres, $foto) {
-        $foto = ImageHandler::uploadImage($foto, $id);
-        $patient = new Patient($id, $naam, $voornaam, $leeftijd, $lengte, $adres, $foto);
+        //$foto = ImageHandler::uploadImage($foto, $id);
+        $img = str_replace('data:image/png;base64,', '', $foto);
+        $img = str_replace(' ', '+', $img);
+        $data = base64_decode($img);
+        $file = 'uploads/'. $id . '.png';
+        $success = file_put_contents($file, $data);
+        
+        $source = imagecreatefrompng($file);
+        $rotate = imagerotate($source,-90 ,0);
+        imagepng($rotate, $file);
+        $patient = new Patient($id, $naam, $voornaam, $leeftijd, $lengte, $adres, $file);
         PatientDAO::insert($patient);
     }
 
@@ -225,7 +234,7 @@ class API {
                 $gewichtGemeten[date("N", strtotime($gewicht->getTijd())) - 1] = true;
             }
         }
-       
+
         return $gewichtGemeten;
     }
 
